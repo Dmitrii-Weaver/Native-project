@@ -1,21 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import NavigatorTab from './components/tabNavigation'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+export default class App extends Component {
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+
+        <NavigatorTab>
+          
+        </NavigatorTab>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
+    flexDirection: 'column',
+    backgroundColor: 'white',
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 18
   },
+  contentBox: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: 100,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderRadius: 15,
+    borderStyle: 'solid',
+  }
 });

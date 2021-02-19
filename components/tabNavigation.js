@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ItemsView from './ItemsView'
-import StartView from './LogOrRegView'
+import StackInTab from './StackInTab'
 import { Ionicons } from 'react-native-vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +23,7 @@ export default class TabNavigation extends Component {
           />
           <Tab.Screen 
             name="Log in" 
-            component={StartView} 
+            component={StackInTab} 
             options={{ 
               tabBarIcon: ({ color, size }) => (
                 <Ionicons name="ios-list" color={color} size={size} />)

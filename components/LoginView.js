@@ -55,54 +55,54 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <View style={styles.screen}>
-                <Text style={styles.header}>User Login</Text>
+            <View style={styles.mainBox}>
+                <Text style={styles.header}>Log in</Text>
                 <Text style={styles.text}>Username</Text>
                 <TextInput
-                    style={styles.input}
+                    style={styles.textbox}
                     value={this.state.userName}
                     placeholder="username"
                     onChangeText={value => this.setUserName(value)}
                 />
                 <Text style={styles.text}>Password</Text>
                 <TextInput
-                    style={styles.input}
+                    style={styles.textbox}
                     value={this.state.password}
                     placeholder="password"
                     onChangeText={value => this.setPassword( value)}
                 />
                 <TouchableHighlight onPress={() => this.loginClick(this.props)}>
                     <View style={styles.primaryButton}>
-                        <Text style={styles.primaryButtonText}>Login</Text>
+                        <Text style={{ color: 'white', fontSize: 20}}>Login</Text>
                     </View>
                 </TouchableHighlight>
-                <Button title="Sign up" color="#000000" onPress={() => this.props.navigation.navigate('Register')} />
+                <Text style={styles.text}>or</Text>
+                <Button title="Sign up" color="#0077B6" onPress={() => this.props.navigation.navigate('Register')} />
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        backgroundColor: 'rgb(51, 153, 255)',
+    header: {
+        fontSize: 40,
+        marginBottom: 20,
+        color: 'black'
+    },
+    mainBox: {
+        backgroundColor: '#CAF0F8',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    header: {
-        fontSize: 40,
-        marginBottom: 20,
-        color: 'white'
-    },
     text: {
         fontSize: 20,
-        color: 'white'
+        color: 'black'
     },
-    input: {
+    textbox: {
         borderWidth: 1,
-        borderRadius: 20,
         height: 40,
-        width: '90%',
+        width: '80%',
         backgroundColor: 'white',
         textAlign: 'center',
         fontSize: 18,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     primaryButton: {
-        backgroundColor: 'rgb(0, 153, 51)',
+        backgroundColor: '#00B4D8',
         height: 60,
         width: 200,
         justifyContent: 'center',
@@ -118,11 +118,6 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 2,
         marginTop: 20,
-        marginBottom: 10
     },
-    primaryButtonText: {
-        color: 'white',
-        fontSize: 20
 
-    }
 });

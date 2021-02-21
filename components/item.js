@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderStyle: 'solid',
         height: 50,
-        width: 250
+        width: 300
     },
     itempic:{
         width:40,
         height:40,
-        marginRight:5
+        marginRight:20
     }
 });

@@ -36,11 +36,11 @@ export default class ItemsView extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <View style={{ flex: 1, alignItems: 'center', backgroundColor:"#CAF0F8" }}>
         <View style={styles.itemBox}>
-        <Text style={{ fontSize: 18, marginTop: 15 }}>Khajiit Has Wares, If You Have Coin</Text>
+        <Text style={styles.header}>Khajiit Has Wares, If You Have Coin</Text>
           {
-            this.state.items.map(i => <Item item={i}  />)
+            this.state.items.map(i => <Item item={i} key={i.item_id} />)
           }
 
         </View>
@@ -50,6 +50,12 @@ export default class ItemsView extends Component {
 }
 
 const styles = StyleSheet.create({
+  header:{
+    fontSize: 18,
+    marginTop:20,
+    marginBottom: 10,
+    color: 'black'
+  },
   root: {
     flexDirection: 'column',
     backgroundColor: 'white',
@@ -61,12 +67,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 20,
     marginBottom: 20,
-    padding: 5,
     alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderRadius: 15,
-    borderStyle: 'solid',
+    backgroundColor: '#CAF0F8',
     width: 300
   }
 });

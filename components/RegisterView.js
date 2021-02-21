@@ -44,25 +44,25 @@ export default class RegisterView extends Component {
 
     render() {
         return (
-            <View style={styles.screen}>
+            <View style={styles.mainBox}>
                 <Text style={styles.header}>Sign Up</Text>
-                <Text>P+lease enter your username</Text>
+                <Text style={styles.text}>Username</Text>
                 <TextInput
-                    style={styles.input}
+                    style={styles.textbox}
                     value={this.state.userName}
                     placeholder="johndoe"
                     onChangeText={value => this.setUserName(value)}
                 />
-                <Text>Please enter your email</Text>
+                <Text style={styles.text}>Email</Text>
                 <TextInput
-                    style={styles.input}
+                    style={styles.textbox}
                     value={this.state.email}
                     placeholder="test@email.com"
                     onChangeText={value => this.setEmail(value)}
                 />
-                <Text>Please enter your password</Text>
+                <Text style={styles.text}>Password</Text>
                 <TextInput
-                    style={styles.input}
+                    style={styles.textbox}
                     value={this.state.password}
                     placeholder="password"
                     onChangeText={value => this.setPassword(value)}
@@ -74,7 +74,7 @@ export default class RegisterView extends Component {
                 </TouchableHighlight>
                 <Button
                     title="Cancel"
-                    color="#000000"
+                    color="#0077B6"
                     onPress={
                         () => this.props.navigation.reset({
                             index: 0,
@@ -87,8 +87,8 @@ export default class RegisterView extends Component {
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        backgroundColor: 'rgb(227, 178, 0)',
+    mainBox: {
+        backgroundColor: '#CAF0F8',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
@@ -96,17 +96,16 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 40,
         marginBottom: 20,
-        color: 'white'
+        color: 'black'
     },
     text: {
         fontSize: 20,
-        color: 'white'
+        color: 'black'
     },
-    input: {
+    textbox: {
         borderWidth: 1,
-        borderRadius: 20,
         height: 40,
-        width: '90%',
+        width: '80%',
         backgroundColor: 'white',
         textAlign: 'center',
         fontSize: 18,
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     primaryButton: {
-        backgroundColor: 'rgb(0, 153, 51)',
+        backgroundColor: '#00B4D8',
         height: 60,
         width: 200,
         justifyContent: 'center',

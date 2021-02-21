@@ -36,13 +36,15 @@ export default class ItemsView extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <View style={{ flex: 1, alignItems: 'center', backgroundColor:"#CAF0F8" }}>
         <View style={styles.itemBox}>
-            <Button title={'LOGGEDOUT'} onPress={() => this.props.onLogout()}></Button>
-        <Text style={{ fontSize: 18, marginTop: 15 }}>LOGGED IN VIEW</Text>
-          {
-            this.state.items.map(i => <Item item={i}  />)
-          }
+          
+        <Text style={{ fontSize: 18, marginTop: 15 }}>Welcome back, {}!</Text>
+        <Button title={'Sell Something!'} ></Button>
+        <Button title={'Edit something!'} ></Button>
+        <Button title={'Delete Something!'} ></Button>
+        
+        <Button title={'LOG OUT'} onPress={() => this.props.onLogout()}></Button>
 
         </View>
       </View>
@@ -62,12 +64,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 20,
     marginBottom: 20,
-    padding: 5,
     alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderRadius: 15,
-    borderStyle: 'solid',
+    backgroundColor: '#CAF0F8',
     width: 300
   }
 });

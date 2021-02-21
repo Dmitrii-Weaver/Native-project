@@ -44,6 +44,7 @@ export default class StackNavigation extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({ activeJWT: responseJWT, isCheckingTokenStorage: false })
+                console.log(this.state.activeJWT)
             })
     }
 

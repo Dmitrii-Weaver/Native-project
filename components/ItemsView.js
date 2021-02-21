@@ -7,38 +7,38 @@ export default class ItemsView extends Component {
     super(props);
     this.state = {
       items: []
-    }    
+    }
   }
-  componentDidMount(){
+  componentDidMount() {
     console.log('getting items');
     fetch('https://gradedapi.herokuapp.com/items', {
       method: 'GET',
     })
-    .then(response => {
-      if (response.ok == false) {
-        throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
-      }
-      return response.json();
-    })
-    .then(json => {
-      console.log("items GET successful")
-      console.log("Received following JSON");
-      console.log(json);
+      .then(response => {
+        if (response.ok == false) {
+          throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("items GET successful")
+        console.log("Received following JSON");
+        console.log(json);
 
-      this.setState({ items: json})
-    })
-    .catch(error => {
-      console.log("Error message:")
-      console.log(error.message)
-    });
+        this.setState({ items: json })
+      })
+      .catch(error => {
+        console.log("Error message:")
+        console.log(error.message)
+      });
 
   }
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', backgroundColor:"#CAF0F8" }}>
+      <View style={{ flex: 1, alignItems: 'center', backgroundColor: "#CAF0F8" }}>
         <View style={styles.itemBox}>
-        <Text style={styles.header}>Khajiit Has Wares, If You Have Coin</Text>
+          <Text style={styles.header}>Khajiit Has Wares, If You Have Coin</Text>
           {
             this.state.items.map(i => <Item item={i} key={i.item_id} />)
           }
@@ -50,9 +50,9 @@ export default class ItemsView extends Component {
 }
 
 const styles = StyleSheet.create({
-  header:{
+  header: {
     fontSize: 18,
-    marginTop:20,
+    marginTop: 20,
     marginBottom: 10,
     color: 'black'
   },

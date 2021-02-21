@@ -77,7 +77,11 @@ export default class LoginScreen extends Component {
                     </View>
                 </TouchableHighlight>
                 <Text style={styles.text}>or</Text>
-                <Button title="Sign up" color="#0077B6" onPress={() => this.props.navigation.navigate('Register')} />
+                <Button 
+                    title="Sign up" 
+                    color="#0077B6" 
+                    onPress={() => this.props.navigation.navigate('Register')} 
+                />
             </View>
         )
     }

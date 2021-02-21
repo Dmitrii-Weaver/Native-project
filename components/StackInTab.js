@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import LoginView from './LoginView'
 import RegisterView from './RegisterView'
 import UserView from './UserView'
+import SellItem from './newItemView'
 import * as SecureStore from 'expo-secure-store'
 
 
@@ -62,8 +63,11 @@ export default class StackNavigation extends Component {
         )
         const screenIfLoggedIn = (
             <>
-                <Stack.Screen name="Register" options={{ headerShown: false }} >
+                <Stack.Screen name="UserView" options={{ headerShown: false }} >
                     {props => <UserView  {...props} jwt={ this.state.activeJWT } onLogout={ this.onLogout } ></UserView>}
+                </Stack.Screen>
+                <Stack.Screen name="SellItem" options={{ headerShown: false }} >
+                    {props => <SellItem  {...props} jwt={ this.state.activeJWT } onLogout={ this.onLogout } ></SellItem>}
                 </Stack.Screen>
             </>
         )

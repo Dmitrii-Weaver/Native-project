@@ -39,12 +39,20 @@ export default class ItemsView extends Component {
       <View style={{ flex: 1, alignItems: 'center', backgroundColor:"#CAF0F8" }}>
         <View style={styles.itemBox}>
           
-        <Text style={{ fontSize: 18, marginTop: 15 }}>Welcome back, {}!</Text>
-        <Button title={'Sell Something!'} ></Button>
-        <Button title={'Edit something!'} ></Button>
-        <Button title={'Delete Something!'} ></Button>
-        
-        <Button title={'LOG OUT'} onPress={() => this.props.onLogout()}></Button>
+        <Text style={{ fontSize: 40, marginTop: 15 }}>Welcome back {}!</Text>
+
+
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button  color={'#0077B6'} title={'Sell Something!'}   onPress={() => this.props.navigation.navigate('SellItem')}></Button>
+
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button color={'#0077B6'} title={'Edit something!'} ></Button>
+
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button color={'#0077B6'} title={'Delete Something!'} ></Button>
+
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button color={'#0077B6'} title={'LOG OUT'} onPress={() => this.props.onLogout()}></Button>
 
         </View>
       </View>
@@ -60,12 +68,16 @@ const styles = StyleSheet.create({
     paddingTop: 18
   },
   itemBox: {
+    backgroundColor: '#CAF0F8',
     flex: 1,
-    flexDirection: 'column',
-    marginTop: 20,
-    marginBottom: 20,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#CAF0F8',
     width: 300
+  },
+  text:{
+    fontSize: 18, 
+    marginTop: 15,
+    marginBottom:15
   }
 });

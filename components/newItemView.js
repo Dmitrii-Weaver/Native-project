@@ -43,22 +43,22 @@ export default class CreateItemView extends Component {
   createItem() {
     fetch('https://gradedapi.herokuapp.com/items', {
       method: 'POST',
-      body: JSON.stringify(       {
+      body: JSON.stringify(              {
         item_id: 3,
         item_info: {
-            name: this.state.Name,
-            description: this.state.Description,
-            category: this.state.Category,
-            location: this.state.Location,
+            name: "ak-3",
+            description: "an alright, not stolen AK-74M",
+            category: "tools",
+            location: "Oulu",
             images: [],
-            price: this.state.Price,
+            price: "100e",
             date_of_posting: "today",
-            delivery: this.state.Delivery
+            delivery: "pick up "
         },
         item_seller: {
             name: "boris",
-            phone: this.state.Phone,
-            id: 1
+            phone: "12313",
+            id: "1"
         }
     }),
       headers: {
@@ -66,11 +66,8 @@ export default class CreateItemView extends Component {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => console.error(err));
+
+      
 
   }
 

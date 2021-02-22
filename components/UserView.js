@@ -34,19 +34,25 @@ export default class ItemsView extends Component {
 
   }
 
+  didLogIn(){
+    if(this.props.decodedJWT){
+      return this.props.decodedJWT.user.uname
+    }
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor:"#CAF0F8" }}>
         <View style={styles.itemBox}>
           
-        <Text style={{ fontSize: 40, marginTop: 15 }}>Welcome back {}!</Text>
+        <Text style={{ fontSize: 40, marginTop: 15 }}>Welcome back {this.didLogIn()}!</Text>
 
 
         <Text styles={styles.itemBox}>&#8195;</Text>
         <Button  color={'#0077B6'} title={'Sell Something!'}   onPress={() => this.props.navigation.navigate('SellItem')}></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
-        <Button color={'#0077B6'} title={'Edit something!'} ></Button>
+        <Button color={'#0077B6'} title={'Edit something!'}  onPress={() => console.log(this.props.decodedJWT)} ></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
         <Button color={'#0077B6'} title={'Delete Something!'} ></Button>

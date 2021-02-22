@@ -3,10 +3,12 @@ import { Text, View, ActivityIndicator } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import jwt_decode from "jwt-decode";
 import LoginView from './LoginView'
 import RegisterView from './RegisterView'
 import UserView from './UserView'
 import SellItem from './newItemView'
+import DeleteItem from './deleteItemView'
 import * as SecureStore from 'expo-secure-store'
 
 
@@ -18,14 +20,21 @@ export default class StackNavigation extends Component {
         super(props);
         this.state = {
             isCheckingTokenStorage: true,
-            activeJWT: null
+            activeJWT: null,
+            decodedJWT: {
+                user:{
+                    uname:'',
+                    id:''
+                }
+            }
         };
     }
 
     onLogout = () => {
         this.setState({ activeJWT: null });
+        this.setState({ decodedJWT: null });
         SecureStore.deleteItemAsync(secureStoreTokenName);
-      }
+    }
 
     componentDidMount() {
         SecureStore.getItemAsync(secureStoreTokenName)
@@ -45,6 +54,8 @@ export default class StackNavigation extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({ activeJWT: responseJWT, isCheckingTokenStorage: false })
+                this.setState({ decodedJWT: jwt_decode(this.state.activeJWT) });
+                console.log(this.state.decodedJWT)
                 console.log(this.state.activeJWT)
             })
     }
@@ -64,21 +75,40 @@ export default class StackNavigation extends Component {
         const screenIfLoggedIn = (
             <>
                 <Stack.Screen name="UserView" options={{ headerShown: false }} >
-                    {props => <UserView  {...props} jwt={ this.state.activeJWT } onLogout={ this.onLogout } ></UserView>}
+                    {
+                        props => <UserView
+                            {...props}
+                            decodedJWT={this.state.decodedJWT}
+                            jwt={this.state.activeJWT}
+                            onLogout={this.onLogout} >
+                        </UserView>}
                 </Stack.Screen>
                 <Stack.Screen name="SellItem" options={{ headerShown: false }} >
-                    {props => <SellItem  {...props} jwt={ this.state.activeJWT } onLogout={ this.onLogout } ></SellItem>}
+                    {
+                        props => <SellItem
+                            {...props}
+                            decodedJWT={this.state.decodedJWT}
+                            jwt={this.state.activeJWT}
+                            onLogout={this.onLogout} >
+                        </SellItem>}
+                </Stack.Screen>
+                <Stack.Screen name="DeleteItem" options={{ headerShown: false }} >
+                    {
+                        props => <SellItem
+                            {...props}
+                            decodedJWT={this.state.decodedJWT}
+                            jwt={this.state.activeJWT}
+                            onLogout={this.onLogout} >
+                        </SellItem>}
                 </Stack.Screen>
             </>
         )
-        if(this.state.activeJWT != null)
-      {
-        return screenIfLoggedIn;
-      }
-      else
-      {
-        return screens;
-      }
+        if (this.state.activeJWT != null) {
+            return screenIfLoggedIn;
+        }
+        else {
+            return screens;
+        }
     }
 
     render() {

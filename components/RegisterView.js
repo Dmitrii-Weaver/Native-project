@@ -37,6 +37,7 @@ export default class RegisterView extends Component {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            this.props.navigation.navigate('Login')
         })
         .catch(err => console.error(err));
 

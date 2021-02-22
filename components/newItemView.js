@@ -8,16 +8,47 @@ export default class CreateItemView extends Component {
 
     super(props);
     this.state = {
-      Name:'a',
-      Description:'a',
-      Category:'a',
-      Location:'a',
-      Price:'a',
-      Delivery:'a',
-      Phone:'a',
+      items: null,
+      Name: 'a',
+      Description: 'a',
+      Category: 'a',
+      Location: 'a',
+      Price: 'a',
+      Delivery: 'a',
+      Phone: 'a',
 
     }
   }
+
+  getItems(){
+    console.log('getting items');
+    fetch('https://gradedapi.herokuapp.com/items', {
+      method: 'GET',
+    })
+      .then(response => {
+        if (response.ok == false) {
+          throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("items GET successful")
+        console.log("Received following JSON");
+        console.log(json);
+
+        this.setState({ items: json })
+      })
+      .catch(error => {
+        console.log("Error message:")
+        console.log(error.message)
+      });
+
+
+  }
+  componentDidMount() {
+      this.getItems()
+  }
+
   setName(value) {
     this.setState({ Name: value })
   }
@@ -41,33 +72,50 @@ export default class CreateItemView extends Component {
   }
 
   createItem() {
+    
     fetch('https://gradedapi.herokuapp.com/items', {
       method: 'POST',
-      body: JSON.stringify(              {
-        item_id: 3,
+      body: JSON.stringify({
+        item_id: this.state.items.length + 1,
         item_info: {
-            name: "ak-3",
-            description: "an alright, not stolen AK-74M",
-            category: "tools",
-            location: "Oulu",
-            images: [],
-            price: "100e",
-            date_of_posting: "today",
-            delivery: "pick up "
+          name: this.state.Name,
+          description: this.state.Description,
+          category: this.state.Category,
+          location: this.state.Location,
+          images: [],
+          price: this.state.Price,
+          date_of_posting: "today",
+          delivery: this.state.Delivery
         },
         item_seller: {
-            name: "boris",
-            phone: "12313",
-            id: "1"
+          name: this.props.decodedJWT.user.uname,
+          phone: this.state.Phone,
+          id: this.props.decodedJWT.user.id.toString(10)
         }
-    }),
+      }),
       headers: {
         "Authorization": "Bearer " + this.props.jwt,
         "Content-type": "application/json; charset=UTF-8"
       }
     })
-
       
+      .then(response => {
+        
+        if (response.ok == false) {
+          
+          throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
+        }
+        this.getItems()
+        return response.json();
+      })
+
+      .catch(error => {
+        this.getItems()
+        console.log("Error message:")
+        console.log(error.message)
+      });
+
+
 
   }
 
@@ -140,7 +188,7 @@ export default class CreateItemView extends Component {
             onChangeText={value => this.setPhone(value)}
           />
         </View>
-        
+
 
 
 
@@ -167,18 +215,18 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-    marginTop:50,
+    marginTop: 50,
     fontSize: 36,
     marginBottom: 15,
     color: 'black'
   },
-  container:{
-    flex:1,
-    flexDirection:'row',
+  container: {
+    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
-    
-    
+
+
   },
   text: {
     fontSize: 20,

@@ -55,7 +55,7 @@ export default class ItemsView extends Component {
         <Button color={'#0077B6'} title={'Edit something!'}  onPress={() => console.log(this.props.decodedJWT)} ></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
-        <Button color={'#0077B6'} title={'Delete Something!'} ></Button>
+        <Button color={'#0077B6'} title={'Delete Something!'} onPress={() => this.props.navigation.navigate('DeleteItem')} ></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
         <Button color={'#0077B6'} title={'LOG OUT'} onPress={() => this.props.onLogout()}></Button>

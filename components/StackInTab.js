@@ -89,17 +89,17 @@ export default class StackNavigation extends Component {
                             {...props}
                             decodedJWT={this.state.decodedJWT}
                             jwt={this.state.activeJWT}
-                            onLogout={this.onLogout} >
+                             >
                         </SellItem>}
                 </Stack.Screen>
                 <Stack.Screen name="DeleteItem" options={{ headerShown: false }} >
                     {
-                        props => <SellItem
+                        props => <DeleteItem
                             {...props}
                             decodedJWT={this.state.decodedJWT}
                             jwt={this.state.activeJWT}
-                            onLogout={this.onLogout} >
-                        </SellItem>}
+                            >
+                        </DeleteItem>}
                 </Stack.Screen>
             </>
         )

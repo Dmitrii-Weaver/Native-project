@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Item from './item'
+import DeletableItem from './deletableItem'
 export default class DeleteItem extends Component {
   constructor(props) {
 
     super(props);
     this.state = {
-      items: []
+      items: [],
     }
   }
 
   getItems(){
     console.log('getting items');
-    fetch('https://gradedapi.herokuapp.com/items', {
+    fetch('https://gradedapi.herokuapp.com/items/user/' +this.props.decodedJWT.user.id, {
       method: 'GET',
     })
       .then(response => {
         if (response.ok == false) {
-          throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
+          throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.text()));
         }
         return response.json();
       })
@@ -26,7 +26,6 @@ export default class DeleteItem extends Component {
         console.log("items GET successful")
         console.log("Received following JSON");
         console.log(json);
-        let neededItems = json.filter(i => i.item_seller.id == this.props.decodedJWT.user.id)
         this.setState({ items: json })
       })
       .catch(error => {
@@ -38,27 +37,10 @@ export default class DeleteItem extends Component {
   }
   componentDidMount() {
       this.getItems()
+      
   }
 
-  deleteItem(itemID){
-    fetch('https://gradedapi.herokuapp.com/items/' + itemID , {
-      method: 'DELETE',
-    })
-      .then(response => {
-        if (response.ok == false) {
-          throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
-        }
-        return response.json();
-      })
-      .then(json => {
-        console.log("Item deleted")
-        this.getItems()
-      })
-      .catch(error => {
-        console.log("Error message:")
-        console.log(error.message)
-      });
-  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: "#CAF0F8" }}>
@@ -67,7 +49,7 @@ export default class DeleteItem extends Component {
           <Button  title="Refresh!" color="#0077B6"  onPress={ () => this.getItems() } />
           <ScrollView>
           {
-            this.state.items.map(i => <Item item={i} key={i.item_id} onPress={() => this.deleteItem(i.item_id)} />)
+            this.state.items.map(i => <DeletableItem item={i} key={i.item_id} jwt={this.props.jwt} onPress={() => this.deleteItem(i.item_id)} />)
           }
           </ScrollView>
           <Button

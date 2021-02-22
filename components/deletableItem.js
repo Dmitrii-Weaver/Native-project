@@ -20,6 +20,8 @@ export default class DeletableItem extends Component {
             if (response.ok == false) {
               throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
             }
+            
+            this.props.getItems()
             return response.json();
           })
     

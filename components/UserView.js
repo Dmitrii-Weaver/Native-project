@@ -9,31 +9,7 @@ export default class ItemsView extends Component {
       items: []
     }    
   }
-  componentDidMount(){
-    console.log('getting items');
-    fetch('https://gradedapi.herokuapp.com/items', {
-      method: 'GET',
-    })
-    .then(response => {
-      if (response.ok == false) {
-        throw new Error("HTTP Code " + response.status + " - " + JSON.stringify(response.json()));
-      }
-      return response.json();
-    })
-    .then(json => {
-      console.log("items GET successful")
-      console.log("Received following JSON");
-      console.log(json);
-
-      this.setState({ items: json})
-    })
-    .catch(error => {
-      console.log("Error message:")
-      console.log(error.message)
-    });
-
-  }
-
+  
   didLogIn(){
     if(this.props.decodedJWT){
       return this.props.decodedJWT.user.uname
@@ -45,17 +21,24 @@ export default class ItemsView extends Component {
       <View style={{ flex: 1, alignItems: 'center', backgroundColor:"#CAF0F8" }}>
         <View style={styles.itemBox}>
           
-        <Text style={{ fontSize: 40, marginTop: 15 }}>Welcome back {this.didLogIn()}!</Text>
+        <Text style={{ fontSize: 28, marginTop: 15 }}>Welcome back, {this.didLogIn()}!</Text>
 
 
-        <Text styles={styles.itemBox}>&#8195;</Text>
-        <Button  color={'#0077B6'} title={'Sell Something!'}   onPress={() => this.props.navigation.navigate('SellItem')}></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
-        <Button color={'#0077B6'} title={'Edit something!'}  onPress={() => console.log(this.props.decodedJWT)} ></Button>
+        <Button color={'#0077B6'} title={'My items'}  onPress={() => this.props.navigation.navigate('MyItems')} ></Button>
+        
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button  color={'#0077B6'} title={'Sell something'}   onPress={() => this.props.navigation.navigate('SellItem')}></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
-        <Button color={'#0077B6'} title={'Delete Something!'} onPress={() => this.props.navigation.navigate('DeleteItem')} ></Button>
+        <Button  color={'#0077B6'} title={'Edit an item'}   onPress={() => this.props.navigation.navigate('EditItem')}></Button>
+
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button color={'#0077B6'} title={'Delete an item'} onPress={() => this.props.navigation.navigate('DeleteItem')} ></Button>
+
+        <Text styles={styles.itemBox}>&#8195;</Text>
+        <Button color={'#0077B6'} title={'Attach a picture!'} onPress={() => this.props.navigation.navigate('DeleteItem')} ></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
         <Button color={'#0077B6'} title={'LOG OUT'} onPress={() => this.props.onLogout()}></Button>

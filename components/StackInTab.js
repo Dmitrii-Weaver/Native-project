@@ -9,6 +9,8 @@ import RegisterView from './RegisterView'
 import UserView from './UserView'
 import SellItem from './newItemView'
 import DeleteItem from './deleteItemView'
+import MyItemsView from './MyItemsView'
+import EditItemView from './EditItemView'
 import * as SecureStore from 'expo-secure-store'
 
 
@@ -100,6 +102,25 @@ export default class StackNavigation extends Component {
                             jwt={this.state.activeJWT}
                             >
                         </DeleteItem>}
+                </Stack.Screen>
+                <Stack.Screen name="MyItems" options={{ headerShown: false }} >
+                    {
+                        props => <MyItemsView
+                            {...props}
+                            decodedJWT={this.state.decodedJWT}
+                            jwt={this.state.activeJWT}
+                            >
+                        </MyItemsView>}
+                </Stack.Screen>
+
+                <Stack.Screen name="EditItem" options={{ headerShown: false }} >
+                    {
+                        props => <EditItemView
+                            {...props}
+                            decodedJWT={this.state.decodedJWT}
+                            jwt={this.state.activeJWT}
+                            >
+                        </EditItemView>}
                 </Stack.Screen>
             </>
         )

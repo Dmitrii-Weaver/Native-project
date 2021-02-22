@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react'
 import { View, Text, StyleSheet, Button, TextInput, TouchableHighlight } from 'react-native'
 import axios from 'axios';
 
-export default class CreateItemView extends Component {
+export default class EditItem extends Component {
 
   constructor(props) {
 
@@ -16,6 +16,7 @@ export default class CreateItemView extends Component {
       Price: 'a',
       Delivery: 'a',
       Phone: 'a',
+      ID:'a'
 
     }
   }
@@ -70,11 +71,15 @@ export default class CreateItemView extends Component {
   setPhone(value) {
     this.setState({ Phone: value })
   }
+  setID(value) {
+    this.setState({ ID: value })
+  }
 
-  createItem() {
+
+  editItem() {
     
-    fetch('https://gradedapi.herokuapp.com/items', {
-      method: 'POST',
+    fetch('https://gradedapi.herokuapp.com/items/' + this.state.ID, {
+      method: 'PUT',
       body: JSON.stringify({
         item_id: this.state.items.length + 1,
         item_info: {
@@ -125,6 +130,15 @@ export default class CreateItemView extends Component {
       <View style={styles.mainBox}>
         <Text style={styles.header}>New item</Text>
 
+        <View style={styles.container}>
+          <Text style={styles.text}>ID : </Text>
+          <TextInput
+            style={styles.textbox}
+            value={this.state.ID}
+            placeholder="789"
+            onChangeText={value => this.setID(value)}
+          />
+        </View>
 
         <View style={styles.container}>
           <Text style={styles.text}>Name : </Text>
@@ -193,7 +207,7 @@ export default class CreateItemView extends Component {
 
 
 
-        <TouchableHighlight onPress={() => this.createItem()}>
+        <TouchableHighlight onPress={() => this.editItem()}>
           <View style={styles.primaryButton}>
             <Text style={styles.primaryButtonText}>Create!</Text>
           </View>
@@ -258,5 +272,6 @@ const styles = StyleSheet.create({
 
   }
 });
+
 
 

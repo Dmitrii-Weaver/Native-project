@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import DeletableItem from './deletableItem'
-export default class DeleteItem extends Component {
+import UserViewItem from './UserViewItem'
+export default class MyItemsView extends Component {
   constructor(props) {
 
     super(props);
@@ -45,11 +45,11 @@ export default class DeleteItem extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: "#CAF0F8" }}>
         <View style={styles.itemBox}>
-          <Text style={styles.header}>Delete an item!</Text>
+          <Text style={styles.header}>Edit an item!</Text>
           <Button  title="Refresh!" color="#0077B6"  onPress={ () => this.getItems() } />
           <ScrollView>
           {
-            this.state.items.map(i => <DeletableItem getItems={()=>this.getItems()} item={i} key={i.item_id} jwt={this.props.jwt} onPress={() => this.deleteItem(i.item_id)} />)
+            this.state.items.map(i => <UserViewItem getItems={() => this.getItems()} item={i} key={i.item_id} jwt={this.props.jwt}  />)
           }
           </ScrollView>
           <Button

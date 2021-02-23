@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import Item from './item'
 export default class ItemsView extends Component {
   constructor(props) {
 
@@ -38,7 +37,7 @@ export default class ItemsView extends Component {
         <Button color={'#0077B6'} title={'Delete an item'} onPress={() => this.props.navigation.navigate('DeleteItem')} ></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
-        <Button color={'#0077B6'} title={'Attach a picture!'} onPress={() => this.props.navigation.navigate('DeleteItem')} ></Button>
+        <Button color={'#0077B6'} title={'Attach a picture!'} onPress={() => this.props.navigation.navigate('AddImageView')} ></Button>
 
         <Text styles={styles.itemBox}>&#8195;</Text>
         <Button color={'#0077B6'} title={'LOG OUT'} onPress={() => this.props.onLogout()}></Button>

@@ -11,6 +11,7 @@ import SellItem from './newItemView'
 import DeleteItem from './deleteItemView'
 import MyItemsView from './MyItemsView'
 import EditItemView from './EditItemView'
+import AddImageView from './AddImageView'
 import * as SecureStore from 'expo-secure-store'
 
 
@@ -121,6 +122,15 @@ export default class StackNavigation extends Component {
                             jwt={this.state.activeJWT}
                             >
                         </EditItemView>}
+                </Stack.Screen>
+                <Stack.Screen name="AddImageView" options={{ headerShown: false }} >
+                    {
+                        props => <AddImageView
+                            {...props}
+                            decodedJWT={this.state.decodedJWT}
+                            jwt={this.state.activeJWT}
+                            >
+                        </AddImageView>}
                 </Stack.Screen>
             </>
         )

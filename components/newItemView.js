@@ -8,7 +8,7 @@ export default class CreateItemView extends Component {
 
     super(props);
     this.state = {
-      items: null,
+      items: [],
       Name: 'a',
       Description: 'a',
       Category: 'a',
@@ -16,6 +16,7 @@ export default class CreateItemView extends Component {
       Price: 'a',
       Delivery: 'a',
       Phone: 'a',
+      ID:0
 
     }
   }
@@ -32,10 +33,6 @@ export default class CreateItemView extends Component {
         return response.json();
       })
       .then(json => {
-        console.log("items GET successful")
-        console.log("Received following JSON");
-        console.log(json);
-
         this.setState({ items: json })
       })
       .catch(error => {
@@ -45,8 +42,21 @@ export default class CreateItemView extends Component {
 
 
   }
+
+  generateID(){
+    this.getItems()
+    let number = Math.floor((Math.random() * 100000) + 1)
+    while(this.state.items.find(i => i.item_id == number)){
+      number = Math.floor((Math.random() * 100000) + 1)
+    } 
+    this.setState({ ID: number })
+  
+    
+
+  }
   componentDidMount() {
       this.getItems()
+      this.generateID()
   }
 
   setName(value) {
@@ -71,12 +81,18 @@ export default class CreateItemView extends Component {
     this.setState({ Phone: value })
   }
 
+
+
+
   createItem() {
+    let date = new Date();
+    let today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
     
+
     fetch('https://gradedapi.herokuapp.com/items', {
       method: 'POST',
       body: JSON.stringify({
-        item_id: this.state.items.length + 1,
+        item_id:  this.state.ID,
         item_info: {
           name: this.state.Name,
           description: this.state.Description,
@@ -84,7 +100,7 @@ export default class CreateItemView extends Component {
           location: this.state.Location,
           images: [],
           price: this.state.Price,
-          date_of_posting: "today",
+          date_of_posting: today,
           delivery: this.state.Delivery
         },
         item_seller: {

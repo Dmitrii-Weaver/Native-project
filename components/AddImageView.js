@@ -42,7 +42,6 @@ export default class AddImageView extends Component {
             name: fileName,
             type: 'image/jpeg'
         });
-        postForm.append('foo', 'bar');
         this.setState({ isSubmitting: true })
         axios({
             method: 'post',

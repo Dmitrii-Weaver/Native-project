@@ -47,6 +47,7 @@ export default class LoginScreen extends Component {
                 this.props.onLoginReceiveJWT(json.token);
             })
             .catch(error => {
+                alert('Nope, try again!')
                 console.log("Error message:")
                 console.log(error.message)
             });

@@ -44,6 +44,7 @@ export default class StackNavigation extends Component {
             .then(response => {
                 console.log("SecureStore.getItemAsync success")
                 this.setState({ activeJWT: response, isCheckingTokenStorage: false })
+                this.setState({ decodedJWT: jwt_decode(this.state.activeJWT), isCheckingTokenStorage: false  });
             })
             .catch(error => {
                 console.log("SecureStore.getItemAsync error")
@@ -57,10 +58,11 @@ export default class StackNavigation extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({ activeJWT: responseJWT, isCheckingTokenStorage: false })
-                this.setState({ decodedJWT: jwt_decode(this.state.activeJWT) });
+                this.setState({ decodedJWT: jwt_decode(this.state.activeJWT), isCheckingTokenStorage: false  });
                 console.log(this.state.decodedJWT)
                 console.log(this.state.activeJWT)
             })
+
     }
 
 

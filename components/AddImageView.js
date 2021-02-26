@@ -5,8 +5,7 @@ import axios from 'axios'
 
 export default class ImagePickAndSend extends Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = {
       isSubmitting: false,
@@ -24,8 +23,7 @@ export default class ImagePickAndSend extends Component {
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     console.log(pickerResult);
 
-    if(pickerResult.cancelled == true)
-    {
+    if (pickerResult.cancelled == true) {
       alert('Image picker cancelled or failed');
       return;
     }
@@ -41,23 +39,23 @@ export default class ImagePickAndSend extends Component {
     });
     postForm.append('foo', 'bar');
     this.setState({ isSubmitting: true })
-    axios({
+    fetch('https://gradedapi.herokuapp.com/items/upload', {
       method: 'POST',
-      url: 'https://gradedapi.herokuapp.com/items/upload',
-      data: postForm,
-      headers: { 'Content-Type': 'multipart/form-data' }
-      })
+      body: postForm,
+
+    })
+      .then(response => response.json())
       .then(response => {
-          //handle success
-          console.log(response);
-          alert("Image upload completed");
-          this.setState({ isSubmitting: false })
+        //handle success
+        console.log(response);
+        alert("Image upload completed");
+        this.setState({ isSubmitting: false })
       })
       .catch(response => {
-          //handle error
-          console.log(response);
-          alert("Image upload failed");
-          this.setState({ isSubmitting: false })
+        //handle error
+        console.log(response);
+        alert("Image upload failed");
+        this.setState({ isSubmitting: false })
       });
   }
 
@@ -67,9 +65,9 @@ export default class ImagePickAndSend extends Component {
         <Text> Image Picker </Text>
 
         { this.state.isSubmitting ? <ActivityIndicator /> :
-          <TouchableOpacity onPress={this.openImagePickerAsync} style={{ borderWidth: 1, borderColor: 'black'}}>
-          <Text>Pick a photo and start upload</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={this.openImagePickerAsync} style={{ borderWidth: 1, borderColor: 'black' }}>
+            <Text>Pick a photo and start upload</Text>
+          </TouchableOpacity>
         }
 
       </View>

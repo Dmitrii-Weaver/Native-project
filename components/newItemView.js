@@ -9,13 +9,13 @@ export default class CreateItemView extends Component {
     super(props);
     this.state = {
       items: [],
-      Name: 'a',
-      Description: 'a',
-      Category: 'a',
-      Location: 'a',
-      Price: 'a',
-      Delivery: 'a',
-      Phone: 'a',
+      Name: '',
+      Description: '',
+      Category: '',
+      Location: '',
+      Price: '',
+      Delivery: '',
+      Phone: '',
       ID:0
 
     }

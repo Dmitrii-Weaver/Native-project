@@ -8,8 +8,8 @@ export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName:'aaa',
-            password:'bbb'
+            userName:'',
+            password:''
         }
     }
     setUserName(value){

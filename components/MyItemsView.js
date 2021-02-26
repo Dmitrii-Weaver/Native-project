@@ -45,7 +45,7 @@ export default class MyItemsView extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: "#CAF0F8" }}>
         <View style={styles.itemBox}>
-          <Text style={styles.header}>Edit an item!</Text>
+          <Text style={styles.header}>My items</Text>
           <Button  title="Refresh!" color="#0077B6"  onPress={ () => this.getItems() } />
           <ScrollView>
           {

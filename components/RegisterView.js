@@ -8,9 +8,9 @@ export default class RegisterView extends Component {
 
         super(props);
         this.state = {
-            userName: 'aaa',
-            email: 'a@gmail.com',
-            password: 'bbb',
+            userName: '',
+            email: '',
+            password: '',
         }
     }
     setUserName(value){
